@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ar"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>عجلة الحظ</title> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 40px auto;
+            border-radius: 50%;
+            background: conic-gradient(#f39c12 0deg 45deg, #e74c3c 45deg 90deg, #f39c12 90deg 135deg, #e74c3c 135deg 180deg, #f39c12 180deg 225deg, #e74c3c 225deg 270deg, #f39c12 270deg 315deg, #e74c3c 315deg 360deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .spin-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .spin-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+    </style> 
+</head> 
+<body> 
+    <h1>عجلة الحظ</h1>
+    <div class="wheel-container" id="wheel">
+        <div class="pointer"></div>
+    </div>
+    <button class="spin-btn" onclick="spinWheel()">قم بتدوير العجلة</button>
+    <div class="result" id="result"></div> 
+    <script>
+        function spinWheel() {
+            const wheel = document.getElementById('wheel');
+            const result = document.getElementById('result');
+            const spinDegrees = Math.floor(Math.random() * (5000 - 3000) + 3000); 
+            const winAmount = (Math.random() * 100).toFixed(2); 
+
+            wheel.style.transform = `rotate(${spinDegrees}deg)`;
+            setTimeout(() => {
+                result.innerText = `لقد ربحت ${winAmount} دولار`;
+                localStorage.setItem('balance', winAmount); 
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
